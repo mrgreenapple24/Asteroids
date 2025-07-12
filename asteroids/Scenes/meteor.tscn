@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://cak0jx4s5cp8i"]
+
+[ext_resource type="Texture2D" uid="uid://0ldxf5c815hy" path="res://Assets/SPRITES AND SFX/SPRITES/ROCK.png" id="1_5civa"]
+[ext_resource type="Script" uid="uid://c1upy5km7qarf" path="res://Scripts/meteor.gd" id="1_wm1ig"]
+[ext_resource type="Texture2D" uid="uid://c3muq364aocnk" path="res://Assets/SPRITES AND SFX/SPRITES/EXPLOSION SPRITE SHEET.png" id="3_bgiwl"]
+[ext_resource type="AudioStream" uid="uid://yykuje3xkm7q" path="res://Assets/SPRITES AND SFX/SFX/STARPOWER_2.wav" id="4_aq33g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgiwl"]
+atlas = ExtResource("3_bgiwl")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aq33g"]
+atlas = ExtResource("3_bgiwl")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mekeu"]
+atlas = ExtResource("3_bgiwl")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1487"]
+atlas = ExtResource("3_bgiwl")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hap5"]
+atlas = ExtResource("3_bgiwl")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xk1x"]
+atlas = ExtResource("3_bgiwl")
+region = Rect2(100, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kgtfb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5civa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgiwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aq33g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mekeu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1487")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hap5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xk1x")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wm1ig"]
+
+[node name="Meteor" type="Area2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_wm1ig")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kgtfb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wm1ig")
+
+[node name="ExplosionTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_aq33g")
+volume_db = -9.975
+pitch_scale = 0.51
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ExplosionTimer" to="." method="_on_explosion_timer_timeout"]

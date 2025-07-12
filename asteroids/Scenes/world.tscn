@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=3 uid="uid://blgo0rw5rngfq"]
+
+[ext_resource type="Script" uid="uid://bl8baujqsd45i" path="res://Scripts/world.gd" id="1_5a7ea"]
+[ext_resource type="Texture2D" uid="uid://btv6loelhk2v4" path="res://Assets/SPRITES AND SFX/SPRITES/square-16.png" id="1_go701"]
+[ext_resource type="PackedScene" uid="uid://du6ep866kq6an" path="res://Scenes/player.tscn" id="2_5a7ea"]
+[ext_resource type="FontFile" uid="uid://da2t2gxh2irqu" path="res://Assets/PixelOperator8.ttf" id="4_8j60k"]
+[ext_resource type="Texture2D" uid="uid://jvqrldsyvw25" path="res://Assets/SPRITES AND SFX/SPRITES/EXTRA_LIFE.png" id="5_fo5ed"]
+[ext_resource type="PackedScene" uid="uid://dh3qtla4kimdd" path="res://Scenes/house.tscn" id="6_5ukr8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_go701"]
+size = Vector2(20, 195)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5a7ea"]
+size = Vector2(20, 197)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8j60k"]
+size = Vector2(255, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
+size = Vector2(257, 20)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_5a7ea")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(20, 20)
+texture = ExtResource("1_go701")
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(-138, 0.5)
+shape = SubResource("RectangleShape2D_go701")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2"]
+position = Vector2(138, 0.5)
+shape = SubResource("RectangleShape2D_5a7ea")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3"]
+position = Vector2(-0.5, -91)
+shape = SubResource("RectangleShape2D_8j60k")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4"]
+position = Vector2(-0.5, 91)
+shape = SubResource("RectangleShape2D_fo5ed")
+
+[node name="MeteorTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="."]
+
+[node name="Lasers" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_5a7ea")]
+
+[node name="Score" type="Label" parent="."]
+offset_left = -23.0
+offset_top = -79.0
+offset_right = 21.0
+offset_bottom = -56.0
+theme_override_fonts/font = ExtResource("4_8j60k")
+theme_override_font_sizes/font_size = 8
+text = "Score: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = -141.0
+offset_top = 67.0
+offset_right = -101.0
+offset_bottom = 78.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_fo5ed")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_fo5ed")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_fo5ed")
+stretch_mode = 2
+
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="House" parent="." instance=ExtResource("6_5ukr8")]
+position = Vector2(0, 70)
+
+[node name="House2" parent="." instance=ExtResource("6_5ukr8")]
+position = Vector2(-40, 70)
+
+[node name="House3" parent="." instance=ExtResource("6_5ukr8")]
+position = Vector2(39, 70)
+
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
+[connection signal="laser" from="Player" to="." method="_on_player_laser"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

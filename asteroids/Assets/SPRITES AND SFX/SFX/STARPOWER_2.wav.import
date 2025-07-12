@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://yykuje3xkm7q"
+path="res://.godot/imported/STARPOWER_2.wav-1c2eb5cb59ac4f4b8e5666ecefc9d196.sample"
+
+[deps]
+
+source_file="res://Assets/SPRITES AND SFX/SFX/STARPOWER_2.wav"
+dest_files=["res://.godot/imported/STARPOWER_2.wav-1c2eb5cb59ac4f4b8e5666ecefc9d196.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

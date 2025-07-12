@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ygurivnr1yly"
+path="res://.godot/imported/BULLET_3.wav-1eb5bfd1c0561a69289efbf0ebe3fda6.sample"
+
+[deps]
+
+source_file="res://Assets/SPRITES AND SFX/SFX/BULLET_3.wav"
+dest_files=["res://.godot/imported/BULLET_3.wav-1eb5bfd1c0561a69289efbf0ebe3fda6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
